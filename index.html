@@ -472,6 +472,29 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   </div>
 </div>
 
+<!-- ============ AI SKILL MATCHER ============ -->
+<div class="matcher-section" id="matcher">
+  <div class="matcher-card">
+    <div class="matcher-header">
+      <div class="matcher-badge">Powered by AI</div>
+      <h2>Paste a Job Description</h2>
+      <p>See how my profile aligns with your role. This portfolio will tailor itself in real-time to highlight the most relevant skills and experience.</p>
+    </div>
+    <textarea class="matcher-input" id="jdInput" placeholder="Paste the job description here..."></textarea>
+    <div class="matcher-btn-row">
+      <button class="matcher-btn" id="tailorBtn" onclick="tailorPortfolio()">Tailor Portfolio</button>
+      <button class="matcher-reset" id="resetBtn" onclick="resetPortfolio()">View Original</button>
+      <span class="matcher-status" id="matcherStatus"></span>
+    </div>
+    <div class="matcher-results" id="matcherResults">
+      <div class="match-role-tag" id="matchRole"></div>
+      <div class="match-highlights" id="matchHighlights"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tailored-badge" id="tailoredBadge" onclick="resetPortfolio()">Tailored for: <span id="badgeRole"></span> &times;</div>
+
 <!-- ============ SKILLS BENTO ============ -->
 <section id="skills">
   <div class="section-label reveal">Skills</div>
@@ -662,31 +685,6 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
     <div class="cert-member-badge"><img src="bgs-member.png" alt="BGS Member Badge"></div>
   </div>
 </section>
-
-<!-- ============ AI SKILL MATCHER ============ -->
-<div class="matcher-section" id="matcher">
-  <div class="matcher-card reveal">
-    <div class="matcher-header">
-      <div class="matcher-badge">Powered by AI</div>
-      <h2>Paste a Job Description</h2>
-      <p>See how my profile aligns with your role. This portfolio will tailor itself in real-time to highlight the most relevant skills and experience.</p>
-    </div>
-    <textarea class="matcher-input" id="jdInput" placeholder="Paste the job description here..."></textarea>
-    <div class="matcher-btn-row">
-      <button class="matcher-btn" id="tailorBtn" onclick="tailorPortfolio()">Tailor Portfolio</button>
-      <button class="matcher-reset" id="resetBtn" onclick="resetPortfolio()">View Original</button>
-      <span class="matcher-status" id="matcherStatus"></span>
-    </div>
-    <div class="matcher-results" id="matcherResults">
-      <div class="match-role-tag" id="matchRole"></div>
-      <div class="match-highlights" id="matchHighlights"></div>
-    </div>
-  </div>
-</div>
-
-<div class="tailored-badge" id="tailoredBadge" onclick="resetPortfolio()">Tailored for: <span id="badgeRole"></span> &times;</div>
-
-<hr class="divider">
 
 <!-- ============ CONTACT ============ -->
 <div class="contact-section" id="contact">

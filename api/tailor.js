@@ -122,14 +122,14 @@ Return ONLY valid JSON (no markdown, no backticks) in this exact format:
         'Authorization': `Bearer ${API_KEY}`
       },
       body: JSON.stringify({
-        model: 'meta/llama-3.1-70b-instruct',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           { role: 'system', content: 'You are a JSON-only response bot. Return only valid JSON, no markdown, no explanation.' },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.3,
+        temperature: 0.2,
         top_p: 0.7,
-        max_tokens: 2048
+        max_tokens: 1500
       })
     });
 
