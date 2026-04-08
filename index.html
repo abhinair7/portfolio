@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -37,7 +36,7 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-in
 @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
 /* CURSOR */
-.cursor-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(232,70,30,0.05) 0%, transparent 70%); pointer-events: none; z-index: 0; transform: translate(-50%, -50%); }
+.cursor-glow { position: fixed; top: 0; left: 0; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(232,70,30,0.05) 0%, transparent 70%); pointer-events: none; z-index: 0; will-change: transform; }
 
 /* ============================
    NAV — BOLD RECRUITER-FRIENDLY
@@ -265,8 +264,6 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 .back-to-top.visible { opacity: 1; transform: translateY(0); }
 .back-to-top:hover { background: var(--accent); transform: translateY(-2px) scale(1.08); }
 
-#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.3; }
-.magnetic { transition: transform 0.2s ease-out; }
 
 /* ============================
    MOBILE RESPONSIVE
@@ -378,7 +375,6 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
-<canvas id="bg-canvas"></canvas>
 <div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><img id="lightbox-img" src="" alt=""></div>
 
 <!-- ============ FLOATING PILL NAV ============ -->
@@ -648,64 +644,58 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
 
 <script>
-// SCROLL PROGRESS + BACK TO TOP
-window.addEventListener('scroll', () => {
+// THROTTLE HELPER
+function throttle(fn, ms) { let last=0; return function(...args) { const now=Date.now(); if(now-last>=ms){last=now;fn.apply(this,args);} }; }
+
+// SCROLL PROGRESS + BACK TO TOP + NAV HIGHLIGHT (single throttled listener)
+const sections = document.querySelectorAll('section, .contact-section');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', throttle(() => {
   const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
   document.getElementById('scrollProgress').style.width = pct + '%';
   document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500);
-});
-
-// CURSOR GLOW
-const glow = document.getElementById('cursorGlow');
-if (window.matchMedia('(pointer: fine)').matches) {
-  let gx=0,gy=0,cx=0,cy=0;
-  document.addEventListener('mousemove', e => { gx=e.clientX; gy=e.clientY; });
-  (function glowLoop() { cx+=(gx-cx)*0.08; cy+=(gy-cy)*0.08; glow.style.left=cx+'px'; glow.style.top=cy+'px'; requestAnimationFrame(glowLoop); })();
-} else glow.style.display='none';
-
-// 3D TILT
-const hp = document.getElementById('heroPhoto'), pc = hp.querySelector('.photo-card');
-hp.addEventListener('mousemove', e => {
-  const r=hp.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
-  pc.style.transform=`rotateY(${x*16}deg) rotateX(${-y*16}deg) scale(1.02)`;
-});
-hp.addEventListener('mouseleave', () => { pc.style.transform='rotateY(0) rotateX(0) scale(1)'; });
-
-// ACCORDION
-function toggleExp(c) { const a=c.classList.contains('active'); document.querySelectorAll('.exp-card').forEach(x=>x.classList.remove('active')); if(!a) c.classList.add('active'); }
-
-// ACTIVE NAV HIGHLIGHT
-const sections = document.querySelectorAll('section, .contact-section');
-const navLinks = document.querySelectorAll('.nav-link');
-window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
   navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+}, 50));
+
+// CURSOR GLOW — simple CSS transform, no rAF loop
+const glow = document.getElementById('cursorGlow');
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', throttle(e => {
+    glow.style.transform = `translate(${e.clientX - 200}px, ${e.clientY - 200}px)`;
+  }, 30));
+} else glow.style.display='none';
+
+// PHOTO TILT — lightweight, CSS transition handles smoothing
+const hp = document.getElementById('heroPhoto'), pc = hp.querySelector('.photo-card');
+hp.addEventListener('mousemove', e => {
+  const r=hp.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+  pc.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg)`;
 });
+hp.addEventListener('mouseleave', () => { pc.style.transform='none'; });
+
+// ACCORDION
+function toggleExp(c) { const a=c.classList.contains('active'); document.querySelectorAll('.exp-card').forEach(x=>x.classList.remove('active')); if(!a) c.classList.add('active'); }
 
 // COUNTER ANIMATION
 function animateCounters() {
   document.querySelectorAll('.counter').forEach(counter => {
     const target = +counter.getAttribute('data-target');
-    const duration = 1800;
+    const duration = 1200;
     const startTime = performance.now();
     function update(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      counter.textContent = Math.floor(eased * target);
+      const progress = Math.min((now - startTime) / duration, 1);
+      counter.textContent = Math.floor((1 - Math.pow(1 - progress, 3)) * target);
       if (progress < 1) requestAnimationFrame(update);
-      else counter.textContent = target;
     }
     requestAnimationFrame(update);
   });
 }
 
-// GSAP
+// GSAP — keep animations but use once:true so ScrollTrigger stops watching after reveal
 gsap.registerPlugin(ScrollTrigger);
 
-// Hero entrance
 const tl = gsap.timeline({ delay: 0.3 });
 tl.from('.hero-text .greeting', { opacity:0, y:20, duration:0.6 })
   .from('.hero-text h1', { opacity:0, y:30, duration:0.7 }, '-=0.3')
@@ -717,34 +707,21 @@ tl.from('.hero-text .greeting', { opacity:0, y:20, duration:0.6 })
   .from('.photo-card', { opacity:0, x:40, duration:0.9, ease:'power3.out' }, '-=0.8')
   .from('.photo-shadow', { opacity:0, scaleX:0.5, duration:0.5 }, '-=0.3');
 
-// Nav entrance
 gsap.from('nav', { y:-80, opacity:0, duration:0.8, delay:1, ease:'power3.out' });
 
-// Reveals
-document.querySelectorAll('.reveal').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%'}, opacity:1, y:0, duration:0.7, ease:'power3.out' }));
-document.querySelectorAll('.reveal-left').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%'}, opacity:1, x:0, duration:0.7, ease:'power3.out' }));
-document.querySelectorAll('.reveal-right').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%'}, opacity:1, x:0, duration:0.7, ease:'power3.out' }));
-document.querySelectorAll('.reveal-scale').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%'}, opacity:1, scale:1, duration:0.8, ease:'power3.out' }));
+// Reveals — once:true so they fire once and stop
+document.querySelectorAll('.reveal').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%',once:true}, opacity:1, y:0, duration:0.7, ease:'power3.out' }));
+document.querySelectorAll('.reveal-left').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%',once:true}, opacity:1, x:0, duration:0.7, ease:'power3.out' }));
+document.querySelectorAll('.reveal-right').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%',once:true}, opacity:1, x:0, duration:0.7, ease:'power3.out' }));
+document.querySelectorAll('.reveal-scale').forEach(el => gsap.to(el, { scrollTrigger:{trigger:el,start:'top 87%',once:true}, opacity:1, scale:1, duration:0.8, ease:'power3.out' }));
 
-// Stagger bento cards
-gsap.utils.toArray('.bento-card').forEach((c,i) => gsap.to(c, { scrollTrigger:{trigger:c,start:'top 88%'}, opacity:1, y:0, duration:0.5, delay:i*0.08 }));
-
-// Stagger project cards
-gsap.utils.toArray('.project-featured').forEach((c,i) => gsap.to(c, { scrollTrigger:{trigger:c,start:'top 88%'}, opacity:1, scale:1, duration:0.6, delay:i*0.12, ease:'back.out(1.4)' }));
-
-// Parallax on hero photo
-gsap.to('.hero-photo', { scrollTrigger:{ trigger:'.hero', scrub:1 }, y:60, ease:'none' });
-
-// MAGNETIC
-document.querySelectorAll('.magnetic').forEach(b => {
-  b.addEventListener('mousemove', e => { const r=b.getBoundingClientRect(); b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.2}px,${(e.clientY-r.top-r.height/2)*0.2}px)`; });
-  b.addEventListener('mouseleave', () => { b.style.transform='translate(0,0)'; });
-});
+gsap.utils.toArray('.bento-card').forEach((c,i) => gsap.to(c, { scrollTrigger:{trigger:c,start:'top 88%',once:true}, opacity:1, y:0, duration:0.5, delay:i*0.08 }));
+gsap.utils.toArray('.project-featured').forEach((c,i) => gsap.to(c, { scrollTrigger:{trigger:c,start:'top 88%',once:true}, opacity:1, scale:1, duration:0.6, delay:i*0.12, ease:'back.out(1.4)' }));
 
 // LIGHTBOX
 function openLightbox(el) { document.getElementById('lightbox-img').src=el.querySelector('img').src; document.getElementById('lightbox').classList.add('active'); }
 
-// TEXT SCRAMBLE
+// TEXT SCRAMBLE — runs only when cycling, not continuously
 class TextScramble {
   constructor(el) { this.el=el; this.chars='!<>-_\\/[]{}—=+*^?#_'; this.update=this.update.bind(this); }
   setText(newText) {
@@ -762,33 +739,11 @@ class TextScramble {
     this.el.innerHTML=output;if(complete===this.queue.length){this.resolve();}else{this.frameRequest=requestAnimationFrame(this.update);this.frame++;}
   }
 }
-const heroName = document.getElementById('heroName');
-const fx = new TextScramble(heroName);
+const fx = new TextScramble(document.getElementById('heroName'));
 const phrases = ['Abhishek', 'an AI Analyst', 'a Solutions Builder', 'Abhishek'];
-let counter = 0;
-function nextPhrase() { fx.setText(phrases[counter]).then(() => { setTimeout(nextPhrase, 2500); }); counter = (counter+1) % phrases.length; }
+let phraseIdx = 0;
+function nextPhrase() { fx.setText(phrases[phraseIdx]).then(() => setTimeout(nextPhrase, 3000)); phraseIdx = (phraseIdx+1) % phrases.length; }
 setTimeout(nextPhrase, 3000);
-
-// THREE.JS
-(function(){
-  const canvas=document.getElementById('bg-canvas'),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000),renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-  renderer.setSize(innerWidth,innerHeight); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  const mat=new THREE.MeshBasicMaterial({color:0xc96442,wireframe:true,transparent:true,opacity:0.06}), shapes=[];
-  for(let i=0;i<5;i++){let g;const r=Math.random();
-    if(r<0.33)g=new THREE.IcosahedronGeometry(0.4+Math.random()*0.4,1);
-    else if(r<0.66)g=new THREE.OctahedronGeometry(0.3+Math.random()*0.3,0);
-    else g=new THREE.TorusGeometry(0.25+Math.random()*0.25,0.08,8,16);
-    const m=new THREE.Mesh(g,mat);m.position.set((Math.random()-0.5)*12,(Math.random()-0.5)*12,(Math.random()-0.5)*5-3);
-    m.rotation.set(Math.random()*Math.PI,Math.random()*Math.PI,0);
-    m.userData={rx:(Math.random()-0.5)*0.003,ry:(Math.random()-0.5)*0.003,fs:0.0005+Math.random()*0.001,fo:Math.random()*Math.PI*2};
-    scene.add(m);shapes.push(m);}
-  camera.position.z=5; let mx=0,my=0;
-  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-0.5)*0.5;my=(e.clientY/innerHeight-0.5)*0.5;});
-  (function animate(){requestAnimationFrame(animate);const t=Date.now()*0.001;
-    shapes.forEach(s=>{s.rotation.x+=s.userData.rx;s.rotation.y+=s.userData.ry;s.position.y+=Math.sin(t*s.userData.fs*100+s.userData.fo)*0.002;});
-    camera.position.x+=(mx-camera.position.x)*0.02;camera.position.y+=(-my-camera.position.y)*0.02;camera.lookAt(scene.position);renderer.render(scene,camera);})();
-  addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
-})();
 </script>
 </body>
 </html>
