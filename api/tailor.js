@@ -6,8 +6,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Please paste a valid job description.' });
   }
 
-  const GEMINI_KEY = process.env.GEMINI_API_KEY;
-  if (!GEMINI_KEY) return res.status(500).json({ error: 'API key not configured.' });
+  const API_KEY = process.env.NVIDIA_API_KEY;
+  if (!API_KEY) return res.status(500).json({ error: 'API key not configured.' });
 
   const resumeContext = `
 CANDIDATE: Abhishek Vinod Nair
@@ -84,40 +84,62 @@ Return ONLY valid JSON (no markdown, no backticks) in this exact format:
   "heroTagline": "rewritten 1-sentence tagline",
   "skills": [
     {"title": "card title", "icon": "original icon text", "description": "rewritten description leading with most relevant tech"},
-    ...all 4 cards reordered by relevance
+    {"title": "card title", "icon": "original icon text", "description": "rewritten description"},
+    {"title": "card title", "icon": "original icon text", "description": "rewritten description"},
+    {"title": "card title", "icon": "original icon text", "description": "rewritten description"}
   ],
   "experience": [
     {
       "index": 0,
       "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
       "impacts": ["impact1", "impact2", "impact3"]
+    },
+    {
+      "index": 1,
+      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
+      "impacts": ["impact1", "impact2", "impact3"]
+    },
+    {
+      "index": 2,
+      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
+      "impacts": ["impact1", "impact2", "impact3"]
+    },
+    {
+      "index": 3,
+      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
+      "impacts": ["impact1", "impact2", "impact3"]
     }
-    ...all 4 experiences reordered by relevance, index refers to original order (0=UMass,1=Cypress,2=Infosys,3=Jio)
   ],
   "projectOrder": [0,1,2],
-  "matchHighlights": ["3-5 short sentences explaining why this candidate is a strong match"]
+  "matchHighlights": ["sentence 1", "sentence 2", "sentence 3"]
 }`;
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
-        })
-      }
-    );
+    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'meta/llama-3.1-70b-instruct',
+        messages: [
+          { role: 'system', content: 'You are a JSON-only response bot. Return only valid JSON, no markdown, no explanation.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0.3,
+        top_p: 0.7,
+        max_tokens: 2048
+      })
+    });
 
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(500).json({ error: 'Gemini API error', details: data });
+      return res.status(500).json({ error: 'NVIDIA API error', details: data });
     }
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const text = data.choices?.[0]?.message?.content;
     if (!text) return res.status(500).json({ error: 'Empty response from AI' });
 
     // Parse JSON from response (strip markdown backticks if present)
