@@ -104,6 +104,46 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 .section-header { margin-bottom: 28px; }
 .section-label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); font-weight: 500; margin-bottom: 8px; display: inline-flex; align-items: center; gap: 10px; }
 .section-label::after { display: none; }
+
+/* ============================
+   AI SKILL MATCHER
+   ============================ */
+.matcher-section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
+.matcher-card { background: linear-gradient(135deg, var(--navy), #162a47); border-radius: 20px; padding: 36px; position: relative; overflow: hidden; }
+.matcher-card::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(232,70,30,0.15) 0%, transparent 70%); pointer-events: none; }
+.matcher-header { margin-bottom: 24px; }
+.matcher-header .matcher-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 9999px; background: rgba(232,70,30,0.15); color: var(--accent); font-size: 11px; font-weight: 700; font-family: var(--mono); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.matcher-header h2 { font-family: var(--serif); font-size: 30px; color: #fff; letter-spacing: -1px; margin-bottom: 8px; }
+.matcher-header p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.matcher-input { width: 100%; min-height: 120px; padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-family: var(--sans); font-size: 14px; line-height: 1.6; resize: vertical; transition: border-color 0.3s; }
+.matcher-input::placeholder { color: rgba(255,255,255,0.3); }
+.matcher-input:focus { outline: none; border-color: var(--accent); }
+.matcher-btn { margin-top: 14px; padding: 12px 28px; border-radius: 9999px; background: var(--accent); color: #fff; border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: var(--sans); }
+.matcher-btn:hover { background: var(--accent-dark); transform: scale(1.03); }
+.matcher-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.matcher-btn-row { display: flex; align-items: center; gap: 12px; }
+.matcher-reset { padding: 12px 28px; border-radius: 9999px; background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: var(--sans); display: none; }
+.matcher-reset:hover { border-color: #fff; color: #fff; }
+.matcher-status { font-size: 13px; color: rgba(255,255,255,0.4); font-family: var(--mono); margin-left: 8px; }
+.matcher-results { margin-top: 24px; display: none; }
+.matcher-results.active { display: block; }
+.match-role-tag { display: inline-block; padding: 6px 16px; border-radius: 9999px; background: rgba(232,70,30,0.15); color: var(--accent); font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+.match-highlights { display: flex; flex-direction: column; gap: 8px; }
+.match-highlight { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; padding-left: 16px; position: relative; }
+.match-highlight::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.tailored-badge { position: fixed; top: 70px; right: 20px; padding: 8px 16px; border-radius: 9999px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; font-family: var(--mono); z-index: 100; display: none; box-shadow: rgba(232,70,30,0.3) 0px 4px 16px; cursor: pointer; transition: all 0.3s; }
+.tailored-badge:hover { transform: scale(1.05); }
+.tailored-badge.active { display: flex; align-items: center; gap: 6px; }
+
+@media (max-width: 768px) {
+  .matcher-section { padding: 32px 20px; }
+  .matcher-card { padding: 24px 18px; }
+  .matcher-header h2 { font-size: 24px; }
+  .matcher-btn-row { flex-direction: column; align-items: stretch; }
+  .matcher-btn, .matcher-reset { width: 100%; text-align: center; }
+  .matcher-status { margin-left: 0; margin-top: 8px; text-align: center; }
+  .tailored-badge { top: auto; bottom: 70px; right: 12px; font-size: 11px; }
+}
 .section-title { font-family: var(--serif); font-size: 38px; letter-spacing: -1.5px; margin-bottom: 8px; }
 .section-subtitle { font-size: 16px; color: var(--secondary); line-height: 1.7; max-width: 550px; margin-bottom: 28px; }
 .divider { border: none; border-top: 1px solid var(--border); margin: 0 40px; max-width: 1120px; margin-left: auto; margin-right: auto; }
@@ -387,6 +427,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
       <a href="#experience" class="nav-link">Experience</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#education" class="nav-link">Education</a>
+      <a href="#matcher" class="nav-link">AI Match</a>
     </div>
     <a href="#contact" class="nav-cta">Contact Me</a>
   </div>
@@ -622,6 +663,31 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   </div>
 </section>
 
+<!-- ============ AI SKILL MATCHER ============ -->
+<div class="matcher-section" id="matcher">
+  <div class="matcher-card reveal">
+    <div class="matcher-header">
+      <div class="matcher-badge">Powered by AI</div>
+      <h2>Paste a Job Description</h2>
+      <p>See how my profile aligns with your role. This portfolio will tailor itself in real-time to highlight the most relevant skills and experience.</p>
+    </div>
+    <textarea class="matcher-input" id="jdInput" placeholder="Paste the job description here..."></textarea>
+    <div class="matcher-btn-row">
+      <button class="matcher-btn" id="tailorBtn" onclick="tailorPortfolio()">Tailor Portfolio</button>
+      <button class="matcher-reset" id="resetBtn" onclick="resetPortfolio()">View Original</button>
+      <span class="matcher-status" id="matcherStatus"></span>
+    </div>
+    <div class="matcher-results" id="matcherResults">
+      <div class="match-role-tag" id="matchRole"></div>
+      <div class="match-highlights" id="matchHighlights"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tailored-badge" id="tailoredBadge" onclick="resetPortfolio()">Tailored for: <span id="badgeRole"></span> &times;</div>
+
+<hr class="divider">
+
 <!-- ============ CONTACT ============ -->
 <div class="contact-section" id="contact">
   <div class="contact-inner">
@@ -744,6 +810,162 @@ const phrases = ['Abhishek', 'an AI Analyst', 'a Solutions Builder', 'Abhishek']
 let phraseIdx = 0;
 function nextPhrase() { fx.setText(phrases[phraseIdx]).then(() => setTimeout(nextPhrase, 3000)); phraseIdx = (phraseIdx+1) % phrases.length; }
 setTimeout(nextPhrase, 3000);
+
+// ============================
+// AI SKILL MATCHER
+// ============================
+const originalData = {
+  heroTagline: document.querySelector('.hero-text p').textContent,
+  skills: Array.from(document.querySelectorAll('.bento-card')).map(c => ({
+    el: c,
+    html: c.innerHTML
+  })),
+  experience: Array.from(document.querySelectorAll('.exp-card')).map(c => ({
+    el: c,
+    html: c.innerHTML
+  })),
+  projects: Array.from(document.querySelectorAll('.project-featured')).map(c => ({
+    el: c,
+    html: c.innerHTML
+  })),
+  skillsParent: document.querySelector('.bento-grid'),
+  expParent: document.querySelector('.exp-grid'),
+  projParent: document.querySelector('.projects-trio')
+};
+
+let isTailored = false;
+
+async function tailorPortfolio() {
+  const jd = document.getElementById('jdInput').value.trim();
+  if (jd.length < 20) { document.getElementById('matcherStatus').textContent = 'Please paste a longer job description.'; return; }
+
+  const btn = document.getElementById('tailorBtn');
+  const status = document.getElementById('matcherStatus');
+  btn.disabled = true;
+  status.textContent = 'Analyzing job description...';
+
+  try {
+    const res = await fetch('/api/tailor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jobDescription: jd })
+    });
+
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'API error'); }
+    const data = await res.json();
+    applyTailoring(data);
+    status.textContent = '';
+  } catch (err) {
+    status.textContent = 'Error: ' + err.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function applyTailoring(data) {
+  isTailored = true;
+
+  // Show badge
+  document.getElementById('badgeRole').textContent = data.roleName;
+  document.getElementById('tailoredBadge').classList.add('active');
+  document.getElementById('resetBtn').style.display = 'inline-block';
+
+  // Show results
+  const results = document.getElementById('matcherResults');
+  results.classList.add('active');
+  document.getElementById('matchRole').textContent = 'Tailored for: ' + data.roleName;
+  const hl = document.getElementById('matchHighlights');
+  hl.innerHTML = (data.matchHighlights || []).map(h => '<div class="match-highlight">' + h + '</div>').join('');
+
+  // Hero tagline
+  const heroP = document.querySelector('.hero-text p');
+  heroP.style.transition = 'opacity 0.3s';
+  heroP.style.opacity = '0';
+  setTimeout(() => { heroP.textContent = data.heroTagline; heroP.style.opacity = '1'; }, 300);
+
+  // Skills — reorder and rewrite descriptions
+  if (data.skills && data.skills.length) {
+    const cards = document.querySelectorAll('.bento-card');
+    data.skills.forEach((skill, i) => {
+      if (cards[i]) {
+        const iconEl = cards[i].querySelector('.bento-icon');
+        const h4 = cards[i].querySelector('h4');
+        const p = cards[i].querySelector('p');
+        if (iconEl) iconEl.textContent = skill.icon;
+        if (h4) h4.textContent = skill.title;
+        if (p) {
+          p.style.transition = 'opacity 0.3s';
+          p.style.opacity = '0';
+          setTimeout(() => { p.textContent = skill.description; p.style.opacity = '1'; }, 200 + i * 100);
+        }
+      }
+    });
+  }
+
+  // Experience — reorder cards and rewrite bullets
+  if (data.experience && data.experience.length) {
+    const expCards = Array.from(document.querySelectorAll('.exp-card'));
+    const parent = originalData.expParent;
+    // Reorder
+    data.experience.forEach(exp => {
+      const card = expCards[exp.index];
+      if (card) parent.appendChild(card);
+    });
+    // Rewrite bullets
+    data.experience.forEach(exp => {
+      const card = expCards[exp.index];
+      if (!card) return;
+      const lis = card.querySelectorAll('.exp-card-body li');
+      exp.bullets.forEach((bullet, j) => {
+        if (lis[j]) {
+          lis[j].style.transition = 'opacity 0.3s';
+          lis[j].style.opacity = '0';
+          setTimeout(() => { lis[j].textContent = bullet; lis[j].style.opacity = '1'; }, 400 + j * 100);
+        }
+      });
+      const impacts = card.querySelectorAll('.exp-impact');
+      if (exp.impacts) {
+        exp.impacts.forEach((impact, j) => { if (impacts[j]) impacts[j].textContent = impact; });
+      }
+    });
+  }
+
+  // Projects — reorder
+  if (data.projectOrder && data.projectOrder.length) {
+    const projCards = Array.from(document.querySelectorAll('.project-featured'));
+    const parent = originalData.projParent;
+    data.projectOrder.forEach(idx => {
+      if (projCards[idx]) parent.appendChild(projCards[idx]);
+    });
+  }
+
+  // Smooth scroll to results
+  document.getElementById('matcherResults').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetPortfolio() {
+  isTailored = false;
+  document.getElementById('tailoredBadge').classList.remove('active');
+  document.getElementById('resetBtn').style.display = 'none';
+  document.getElementById('matcherResults').classList.remove('active');
+
+  // Restore hero
+  document.querySelector('.hero-text p').textContent = originalData.heroTagline;
+
+  // Restore skills
+  originalData.skills.forEach(s => { s.el.innerHTML = s.html; });
+
+  // Restore experience
+  originalData.experience.forEach(s => {
+    s.el.innerHTML = s.html;
+    originalData.expParent.appendChild(s.el);
+  });
+
+  // Restore projects
+  originalData.projects.forEach(s => {
+    originalData.projParent.appendChild(s.el);
+  });
+}
 </script>
 </body>
 </html>
