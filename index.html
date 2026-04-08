@@ -135,15 +135,6 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 .tailored-badge:hover { transform: scale(1.05); }
 .tailored-badge.active { display: flex; align-items: center; gap: 6px; }
 
-@media (max-width: 768px) {
-  .matcher-section { padding: 32px 20px; }
-  .matcher-card { padding: 24px 18px; }
-  .matcher-header h2 { font-size: 24px; }
-  .matcher-btn-row { flex-direction: column; align-items: stretch; }
-  .matcher-btn, .matcher-reset { width: 100%; text-align: center; }
-  .matcher-status { margin-left: 0; margin-top: 8px; text-align: center; }
-  .tailored-badge { top: auto; bottom: 70px; right: 12px; font-size: 11px; }
-}
 .section-title { font-family: var(--serif); font-size: 38px; letter-spacing: -1.5px; margin-bottom: 8px; }
 .section-subtitle { font-size: 16px; color: var(--secondary); line-height: 1.7; max-width: 550px; margin-bottom: 28px; }
 .divider { border: none; border-top: 1px solid var(--border); margin: 0 40px; max-width: 1120px; margin-left: auto; margin-right: auto; }
@@ -393,6 +384,19 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   .contact-card .c-icon { width: 38px; height: 38px; font-size: 14px; }
   .contact-card .c-text .value { font-size: 13px; }
   .footer-bar { padding: 14px 20px; }
+
+  /* AI MATCHER */
+  .matcher-section { padding: 32px 20px; }
+  .matcher-card { padding: 24px 18px; }
+  .matcher-header h2 { font-size: 24px; }
+  .matcher-header p { font-size: 13px; }
+  .matcher-input { min-height: 100px; font-size: 13px; }
+  .matcher-btn-row { flex-direction: column; align-items: stretch; }
+  .matcher-btn, .matcher-reset { width: 100%; text-align: center; }
+  .matcher-status { margin-left: 0; margin-top: 8px; text-align: center; }
+  .match-role-tag { font-size: 12px; }
+  .match-highlight { font-size: 12px; }
+  .tailored-badge { top: auto; bottom: 70px; right: 12px; font-size: 11px; }
 
   /* CURSOR & CANVAS — disable on mobile */
   .cursor-glow { display: none !important; }
