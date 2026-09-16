@@ -21,25 +21,34 @@ SKILLS:
 4. Analytics & BI: Power BI, Tableau, Python (Pandas, NumPy), SQL, R, Statistical Analysis, Data Visualization
 
 EXPERIENCE:
-1. Graduate Assistant — MSIS, UMass Boston (Jan–May 2026, Boston MA)
+1. Digital Transformation Specialist, Iwaki America (Jun 2026–Present, Boston MA)
+   Industrial pump and fluid-handling manufacturer/distributor. Owns the digitization roadmap for planning, purchasing, and pricing.
+   - Designed and deployed a 16-stage Python MRP and inventory planning engine processing 4M+ ERP transaction records and 15 years of demand history across ~5,600 SKUs, replacing a legacy Visual Basic process
+   - Identified and corrected 9 systemic defects in the legacy planning logic, cutting unnecessary planned purchase commitment by double digits while raising measured service level
+   - Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) answering purchasing questions from a deterministic evidence chain with no data leaving the network — latency cut from 243s to 30–150ms
+   - Built an evidence-based price calibration engine on a reconstructed 16-year pricing history, and a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server
+   - Tech: Python, pandas, NumPy, Microsoft SQL Server, T-SQL, Parquet/PyArrow, ETL, FastAPI, pytest, Ollama/local LLMs, RAG, MCP, Windows Server
+   - Impacts: 4M+ ERP Records, ~5,600 SKUs, Double-Digit % Commitment Cut, 243s → 30ms, 1,777 Tests
+
+2. Graduate Assistant — MSIS, UMass Boston (Jan–May 2026, Boston MA)
    - Developed cyber-attack simulation artifacts aligned with MITRE ATT&CK framework for 50+ graduate students
    - Designed and delivered 8+ hands-on labs on persistence mechanisms, exfiltration detection, and timeline reconstruction
    - Created mitigation-focused exercises emphasizing artifact extraction and anomaly response
    - Impacts: 50+ Students, +35% Proficiency, -40% Recovery Time
 
-2. Business Analyst Intern, Cypress Atlantic (Jun–Aug 2024, Boston MA)
+3. Business Analyst Intern, Cypress Atlantic (Jun–Aug 2024, Boston MA)
    - Led end-to-end development of AI-powered restaurant automation platform using Firebase for 20+ users
    - Built Power BI dashboards with time series analysis and seasonal patterns for sales/inventory forecasting
    - Implemented real-time Firestore/Cloud Functions synchronization, eliminating 90% of manual data coordination
    - Impacts: -25% Food Waste, $15K+ Savings, +40% Adoption
 
-3. Digital Specialist Engineer, Infosys (Jul 2022–May 2024, Chennai India)
+4. Digital Specialist Engineer, Infosys (Jul 2022–May 2024, Chennai India)
    - Designed and delivered 3 major end-to-end enterprise applications using IBM RAD and Java/JSP/JavaScript
    - Optimized SQL queries and stored procedures with DBeaver, improving database performance by 40%
    - Led Jenkins CI/CD pipeline deployments, cutting deployment times by 50% with 99% success rate
    - Impacts: 3 Enterprise Apps, +40% DB Perf, 99% Deploy Rate
 
-4. Graduate Engineer Trainee, Reliance Jio (Feb–Jul 2022, Mumbai India)
+5. Graduate Engineer Trainee, Reliance Jio (Feb–Jul 2022, Mumbai India)
    - Gathered business requirements for Internal Auditing Website ensuring 100% compliance alignment
    - Developed responsive Angular web interfaces using HTML, CSS, and TypeScript, boosting engagement by 25%
    - Facilitated daily Scrum meetings for 10+ cross-functional team members, reducing deployment times by 4x
@@ -91,8 +100,8 @@ Return ONLY valid JSON (no markdown, no backticks) in this exact format:
   "experience": [
     {
       "index": 0,
-      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
-      "impacts": ["impact1", "impact2", "impact3"]
+      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3", "rewritten bullet 4"],
+      "impacts": ["impact1", "impact2", "impact3", "impact4", "impact5"]
     },
     {
       "index": 1,
@@ -106,6 +115,11 @@ Return ONLY valid JSON (no markdown, no backticks) in this exact format:
     },
     {
       "index": 3,
+      "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
+      "impacts": ["impact1", "impact2", "impact3"]
+    },
+    {
+      "index": 4,
       "bullets": ["rewritten bullet 1", "rewritten bullet 2", "rewritten bullet 3"],
       "impacts": ["impact1", "impact2", "impact3"]
     }

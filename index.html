@@ -182,7 +182,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 .exp-card.active .exp-toggle { transform: rotate(180deg); }
 
 .exp-card-body { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-out), padding 0.4s; padding: 0 22px; }
-.exp-card.active .exp-card-body { max-height: 350px; padding: 0 22px 18px; }
+.exp-card.active .exp-card-body { max-height: 480px; padding: 0 22px 18px; }
 .exp-card-body ul { list-style: none; padding: 0; border-top: 1px solid var(--border); padding-top: 14px; }
 .exp-card-body li { font-size: 13px; color: var(--secondary); line-height: 1.7; padding-left: 18px; position: relative; margin-bottom: 8px; }
 .exp-card-body li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
@@ -225,7 +225,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 .gem-gallery-strip { display: flex; gap: 10px; }
 .gem-thumb { width: 110px; height: 72px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; flex-shrink: 0; }
 .gem-thumb:hover { border-color: var(--accent); transform: scale(1.06); box-shadow: rgba(232,70,30,0.12) 0px 8px 20px; }
-.gem-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gem-thumb img, .gem-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ============================
    EDUCATION — with watermark logos
@@ -283,7 +283,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 /* LIGHTBOX */
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 300; display: none; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(12px); }
 .lightbox.active { display: flex; }
-.lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 16px; }
+.lightbox img, .lightbox video { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 16px; }
 
 /* BACK TO TOP */
 .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; z-index: 99; opacity: 0; transform: translateY(16px); transition: all 0.35s var(--ease-out); box-shadow: rgba(27,45,79,0.25) 0px 8px 24px; }
@@ -339,7 +339,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   .exp-meta { text-align: left; flex-basis: 100%; order: 4; }
   .exp-meta .exp-date { font-size: 11px; }
   .exp-card .exp-watermark { display: none; }
-  .exp-card.active .exp-card-body { max-height: 500px; padding: 0 16px 16px; }
+  .exp-card.active .exp-card-body { max-height: 640px; padding: 0 16px 16px; }
   .exp-card-body li { font-size: 12px; }
   .exp-impacts { gap: 4px; }
   .exp-impact { font-size: 10px; padding: 3px 8px; }
@@ -421,7 +421,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
 
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><img id="lightbox-img" src="" alt=""></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt=""><video id="lightbox-video" src="" muted loop playsinline controls hidden></video></div>
 
 <!-- ============ FLOATING PILL NAV ============ -->
 <nav>
@@ -521,6 +521,24 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
   <h2 class="section-title reveal">Professional Experience</h2>
   <div class="exp-grid">
     <div class="exp-card active reveal" onclick="toggleExp(this)">
+      <img class="exp-watermark" src="logo-iwaki.png" alt="">
+      <div class="exp-card-header">
+        <div class="exp-logo"><img src="logo-iwaki-mark.png" alt="Iwaki America"></div>
+        <div class="exp-header-text"><h3>Digital Transformation Specialist</h3><div class="exp-company">Iwaki America</div></div>
+        <div class="exp-meta"><div class="exp-date">Jun 2026 – Present</div><div class="exp-location">Boston, MA</div></div>
+        <div class="exp-toggle">&darr;</div>
+      </div>
+      <div class="exp-card-body">
+        <ul>
+          <li>Designed and deployed a 16-stage Python MRP and inventory planning engine processing 4M+ ERP transaction records and 15 years of demand history across ~5,600 SKUs, replacing a legacy Visual Basic process</li>
+          <li>Identified and corrected 9 systemic defects in the legacy planning logic, cutting unnecessary planned purchase commitment by double digits while raising measured service level</li>
+          <li>Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) that answers purchasing questions from a deterministic evidence chain with no data leaving the network — latency cut from 243s to 30–150ms</li>
+          <li>Built an evidence-based price calibration engine on a reconstructed 16-year pricing history, and a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server</li>
+        </ul>
+        <div class="exp-impacts"><span class="exp-impact">4M+ ERP Records</span><span class="exp-impact">~5,600 SKUs</span><span class="exp-impact">Double-Digit % Commitment Cut</span><span class="exp-impact">243s &rarr; 30ms</span><span class="exp-impact">1,777 Tests</span></div>
+      </div>
+    </div>
+    <div class="exp-card reveal" onclick="toggleExp(this)">
       <img class="exp-watermark" src="logo-umass.png" alt="">
       <div class="exp-card-header">
         <div class="exp-logo"><img src="logo-umass.png" alt="UMass Boston"></div>
@@ -646,7 +664,7 @@ section { padding: 48px 40px; max-width: 1200px; margin: 0 auto; }
       <div class="gem-thumb" onclick="openLightbox(this)"><img src="gem-simulate.jpg" alt="Simulation Lab"></div>
       <div class="gem-thumb" onclick="openLightbox(this)"><img src="gem-intel.jpg" alt="Intelligence"></div>
       <div class="gem-thumb" onclick="openLightbox(this)"><img src="gem-charts.jpg" alt="Live Charts"></div>
-      <div class="gem-thumb" onclick="openLightbox(this)"><img src="gem-splash.gif" alt="Splash"></div>
+      <div class="gem-thumb" onclick="openLightbox(this)"><video src="gem-splash.mp4" poster="gem-splash-poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
     </div>
   </div>
 </section>
@@ -798,7 +816,13 @@ gsap.utils.toArray('.bento-card').forEach((c,i) => gsap.to(c, { scrollTrigger:{t
 gsap.utils.toArray('.project-featured').forEach((c,i) => gsap.to(c, { scrollTrigger:{trigger:c,start:'top 88%',once:true}, opacity:1, scale:1, duration:0.6, delay:i*0.12, ease:'back.out(1.4)' }));
 
 // LIGHTBOX
-function openLightbox(el) { document.getElementById('lightbox-img').src=el.querySelector('img').src; document.getElementById('lightbox').classList.add('active'); }
+function openLightbox(el) {
+  const src=el.querySelector('img, video'), lbImg=document.getElementById('lightbox-img'), lbVid=document.getElementById('lightbox-video');
+  if (src.tagName === 'VIDEO') { lbImg.hidden=true; lbVid.hidden=false; lbVid.src=src.getAttribute('src'); lbVid.play().catch(()=>{}); }
+  else { lbVid.pause(); lbVid.hidden=true; lbImg.hidden=false; lbImg.src=src.src; }
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() { const lbVid=document.getElementById('lightbox-video'); lbVid.pause(); document.getElementById('lightbox').classList.remove('active'); }
 
 // TEXT SCRAMBLE — runs only when cycling, not continuously
 class TextScramble {
