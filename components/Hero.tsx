@@ -14,7 +14,7 @@ export function Hero() {
       <header className="hero" id="top">
         <ShaderField />
         <div className="hero-content">
-        <span className="eyebrow accent reveal">Digital Transformation · AI Systems</span>
+        <span className="eyebrow accent reveal">Forward Deployed Engineer · AI Systems &amp; Solutions</span>
         <h1 className="display h1 reveal">
           I build production systems people <span className="accent-word">trust</span>.
         </h1>
@@ -29,21 +29,21 @@ export function Hero() {
             <Image src="/photo.jpg" alt={profile.name} width={560} height={700} priority sizes="(max-width: 940px) 100vw, 500px" />
             <div className="ptag">
               <div className="n">{profile.name}</div>
-              <div className="r">{profile.role} · {profile.company}</div>
+              <div className="r">{profile.discipline}</div>
             </div>
           </div>
 
           <div className="nowcard reveal">
             <div className="nc-head">
-              <span className="eyebrow">Current</span>
+              <span className="eyebrow">Profile</span>
               <span className="nc-dot" title="Open to new roles" />
             </div>
             <dl>
-              <div className="nc-row"><dt>Role</dt><dd>{profile.role}</dd></div>
-              <div className="nc-row"><dt>Org</dt><dd>{profile.company} Inc.</dd></div>
-              <div className="nc-row"><dt>Since</dt><dd>{profile.since}</dd></div>
+              <div className="nc-row"><dt>Role</dt><dd>{profile.discipline}</dd></div>
+              <div className="nc-row"><dt>Exp</dt><dd>{profile.experience}</dd></div>
+              <div className="nc-row"><dt>Focus</dt><dd><span className="soft">{profile.focusShort}</span></dd></div>
+              <div className="nc-row"><dt>Current</dt><dd>{profile.company}</dd></div>
               <div className="nc-row"><dt>Base</dt><dd>{profile.location}</dd></div>
-              <div className="nc-row"><dt>Focus</dt><dd><span className="soft">{profile.focus.join(" · ")}</span></dd></div>
               <div className="nc-row"><dt>Status</dt><dd>{profile.status}</dd></div>
             </dl>
           </div>

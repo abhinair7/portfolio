@@ -43,13 +43,13 @@ export function TailorEngine() {
   }
 
   return (
-    <section className="section" id="matcher">
+    <section className="section" id="tailor">
       <div className="matcher reveal">
         <div className="matcher-in">
-          <span className="matcher-badge">Live model</span>
+          <span className="matcher-badge">For recruiters</span>
           <h2 className="display">How do I <em>fit</em> your role?</h2>
           <p className="matcher-lede">
-            Paste a job description. This page re-reads my record against it and re-orders what matters — structured output, no fabrication, only re-emphasis of real work.
+            Paste a job description and this page re-orders itself to what the role needs — drawn only from real work, never invented.
           </p>
           <textarea
             className="matcher-input"

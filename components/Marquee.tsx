@@ -21,7 +21,7 @@ export function Marquee() {
         {run.map((t, i) => (
           <span key={i} style={{ display: "inline-flex", alignItems: "center" }}>
             <span className={`mq-item${t.serif ? " serif" : ""}`}>{t.label}</span>
-            <span className="mq-sep">✦</span>
+            <span className="mq-sep">/</span>
           </span>
         ))}
       </div>

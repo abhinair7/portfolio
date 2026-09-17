@@ -19,11 +19,11 @@ export default function Home() {
       <main>
         <Hero />
         <Marquee />
-        <TailorEngine />
         <Skills />
         <Experience />
         <Projects />
         <Education />
+        <TailorEngine />
       </main>
       <Contact />
       <footer className="footer">

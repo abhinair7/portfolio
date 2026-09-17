@@ -77,8 +77,9 @@ body::before {
 
 /* Reveal targets are visible by default. The motion layer (anime.js) hides them
    via inline styles only while it is actively running, with a fail-safe that
-   restores visibility — so content can never be permanently hidden. */
-.reveal, .reveal-c { will-change: opacity, transform; }
+   restores visibility — so content can never be permanently hidden.
+   No persistent will-change here: keeping compositing layers for the whole page
+   hurts scroll smoothness. anime.js sets the transform only during the tween. */
 
 /* ============================================================
    NAV

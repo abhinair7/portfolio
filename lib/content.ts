@@ -4,13 +4,16 @@
 export const profile = {
   name: "Abhishek Vinod Nair",
   shortName: "Abhishek Nair",
+  discipline: "Forward Deployed Engineer",
   role: "Digital Transformation Specialist",
   company: "Iwaki America",
   location: "Boston, Massachusetts",
   since: "Jun 2026",
+  experience: "4+ years",
+  focusShort: "AI Systems · Data Eng · Supply Chain",
   tagline:
-    "I design and ship production systems that turn operational data into decisions teams can trust — across data engineering, applied AI, and analytics. Currently building them as Digital Transformation Specialist at Iwaki America.",
-  focus: ["MRP", "Pricing", "On-Prem LLM"],
+    "Forward deployed engineer and AI systems builder with 4+ years shipping production software — data engineering, applied AI, and analytics that turn operational complexity into decisions teams trust.",
+  focus: ["AI Systems", "Data Engineering", "Supply Chain"],
   status: "Open to new roles",
   email: "a.nair002@umb.edu",
   phone: "+1 (857) 339-9122",
@@ -19,9 +22,9 @@ export const profile = {
 } as const;
 
 export const heroStats = [
-  { value: 4, suffix: "M+", label: "ERP Records Modeled" },
-  { value: 5600, suffix: "", label: "SKUs Planned" },
-  { value: 1777, suffix: "", label: "Automated Tests" },
+  { value: 4, suffix: "+ yrs", label: "Shipping Production Systems" },
+  { value: 6, suffix: "", label: "Systems Built End-to-End" },
+  { value: 1777, suffix: "", label: "Automated Tests Written" },
 ] as const;
 
 export const marquee = [
