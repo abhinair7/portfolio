@@ -1,5 +1,4 @@
 {
-  "rewrites": [
-    { "source": "/api/tailor", "destination": "/api/tailor" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs"
 }
