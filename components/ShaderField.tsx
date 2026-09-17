@@ -40,13 +40,13 @@ void main(){
   vec2 r = vec2(fbm(p*1.6 + 1.7*q + t*0.6), fbm(p*1.6 + 1.7*q - t*0.5));
   float f = fbm(p*1.5 + 2.0*r);
 
-  // palette — near-white base, faint cobalt + warm sand
-  vec3 base  = vec3(0.984, 0.984, 0.992);
-  vec3 blue  = vec3(0.62, 0.78, 0.98);
-  vec3 sand  = vec3(0.98, 0.93, 0.86);
+  // palette — warm cream base, faint violet + warm sand
+  vec3 base   = vec3(0.953, 0.945, 0.906);
+  vec3 violet = vec3(0.55, 0.44, 0.95);
+  vec3 sand   = vec3(0.98, 0.90, 0.74);
   vec3 col = base;
-  col = mix(col, blue, smoothstep(0.35,0.95,f)*0.55);
-  col = mix(col, sand, smoothstep(0.30,0.85,r.x)*0.28);
+  col = mix(col, violet, smoothstep(0.38,0.95,f)*0.42);
+  col = mix(col, sand, smoothstep(0.30,0.85,r.x)*0.32);
 
   // gentle radial vignette back to base at the edges
   float vig = smoothstep(1.1, 0.25, distance(uv, vec2(0.5,0.42)));

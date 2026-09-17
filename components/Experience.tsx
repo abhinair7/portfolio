@@ -20,7 +20,7 @@ export function Experience() {
       <div className="section-in">
         <div className="section-head reveal">
           <span className="eyebrow accent">02 — Experience</span>
-          <h2 className="display h2">Where I&apos;ve worked</h2>
+          <h2 className="display h2">Where I&apos;ve <em>worked</em></h2>
           <p className="sub">
             Four years across industrial digitization, enterprise engineering and analytics — most recent first. Select a role to expand.
           </p>

@@ -47,7 +47,7 @@ export function TailorEngine() {
       <div className="matcher reveal">
         <div className="matcher-in">
           <span className="matcher-badge">Live model</span>
-          <h2 className="display">How do I fit your role?</h2>
+          <h2 className="display">How do I <em>fit</em> your role?</h2>
           <p className="matcher-lede">
             Paste a job description. This page re-reads my record against it and re-orders what matters — structured output, no fabrication, only re-emphasis of real work.
           </p>

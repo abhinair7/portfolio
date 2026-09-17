@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Schibsted_Grotesk, Fraunces, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/lib/content";
 import "./globals.css";
 
@@ -7,6 +7,14 @@ const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-schibsted",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -51,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${schibsted.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={`${schibsted.variable} ${fraunces.variable} ${jetbrains.variable}`}>
       <body>{children}</body>
     </html>
   );

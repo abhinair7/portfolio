@@ -10,7 +10,7 @@ export function Skills() {
     <section className="section" id="skills">
       <div className="section-head reveal">
         <span className="eyebrow accent">01 — Capability</span>
-        <h2 className="display h2">What I build with</h2>
+        <h2 className="display h2">What I <em>build</em> with</h2>
         <p className="sub">
           The stack behind systems that turn operational data into decisions — data engineering, applied AI, and the production rigor that keeps them running.
         </p>

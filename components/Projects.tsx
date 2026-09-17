@@ -26,7 +26,7 @@ export function Projects() {
     <section className="section" id="projects">
       <div className="section-head reveal">
         <span className="eyebrow accent">03 — Selected work</span>
-        <h2 className="display h2">Things I&apos;ve shipped</h2>
+        <h2 className="display h2">Things I&apos;ve <em>shipped</em></h2>
         <p className="sub">
           Each one starts with the problem, who it was for, and the key trade-off. The systems built inside Iwaki America run in production and can&apos;t be linked publicly — architecture and outcomes are described instead.
         </p>

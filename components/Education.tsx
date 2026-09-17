@@ -7,7 +7,7 @@ export function Education() {
       <div className="section-in">
         <div className="section-head reveal">
           <span className="eyebrow accent">04 — Background</span>
-          <h2 className="display h2">Education &amp; honors</h2>
+          <h2 className="display h2">Education &amp; <em>honors</em></h2>
         </div>
 
         <div className="edu-grid reveal-c">
