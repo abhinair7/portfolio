@@ -34,6 +34,61 @@ export const marquee = [
   "T-SQL", "pytest", "MRP",
 ] as const;
 
+// The career as four cinematic acts — the narrative spine of the page.
+export interface JourneyAct {
+  id: string;
+  chapter: string;
+  years: string;
+  title: string;
+  role: string;
+  line: string;
+  icons: string[]; // simple-icons slugs (e.g. "siAngular")
+  media: { type: "video" | "image"; src: string; poster?: string };
+}
+
+export const journey: JourneyAct[] = [
+  {
+    id: "frontend",
+    chapter: "Chapter I",
+    years: "2022",
+    title: "Frontend",
+    role: "Frontend Developer · Reliance Jio",
+    line: "I started at the surface — building responsive Angular interfaces and learning how software actually meets the people who use it.",
+    icons: ["siAngular", "siTypescript", "siJavascript", "siHtml5", "siCss3"],
+    media: { type: "video", src: "/act-frontend.mp4", poster: "/act-frontend-poster.jpg" },
+  },
+  {
+    id: "fullstack",
+    chapter: "Chapter II",
+    years: "2022 — 2024",
+    title: "Full-stack",
+    role: "Digital Specialist Engineer · Infosys",
+    line: "Then I went end-to-end — enterprise applications in Java, tuned SQL, and CI/CD pipelines, shipping to real users at scale.",
+    icons: ["siJenkins", "siOracle", "siMysql", "siJavascript", "siGit"],
+    media: { type: "video", src: "/act-fullstack.mp4", poster: "/act-fullstack-poster.jpg" },
+  },
+  {
+    id: "analytics",
+    chapter: "Chapter III",
+    years: "2024 — 2026",
+    title: "Business Analytics",
+    role: "MS Business Analytics · UMass Boston",
+    line: "I crossed an ocean to change the question — from how to build the software to what the data should decide.",
+    icons: ["siPython", "siPandas", "siNumpy", "siTableau", "siPostgresql"],
+    media: { type: "video", src: "/act-analytics.mp4", poster: "/act-analytics-poster.jpg" },
+  },
+  {
+    id: "ai",
+    chapter: "Chapter IV",
+    years: "2026 — Now",
+    title: "AI Engineering",
+    role: "Forward Deployed Engineer · Iwaki America",
+    line: "Now I bring AI to that question — production MRP, pricing, and on-premise LLM systems that turn operational data into decisions teams trust.",
+    icons: ["siPython", "siPytorch", "siOpenai", "siFastapi", "siOllama"],
+    media: { type: "image", src: "/photo.jpg" },
+  },
+];
+
 export interface Skill {
   code: string;
   title: string;

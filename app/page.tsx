@@ -1,12 +1,11 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
-import { TailorEngine } from "@/components/TailorEngine";
+import { Journey } from "@/components/Journey";
 import { Skills } from "@/components/Skills";
-import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
 import { Education } from "@/components/Education";
 import { Contact } from "@/components/Contact";
+import { TailorEngine } from "@/components/TailorEngine";
 import { ScrollFX } from "@/components/ScrollFX";
 import { TailorProvider } from "@/components/TailorContext";
 import { profile } from "@/lib/content";
@@ -18,10 +17,9 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Marquee />
-        <Skills />
-        <Experience />
+        <Journey />
         <Projects />
+        <Skills />
         <Education />
         <TailorEngine />
       </main>
