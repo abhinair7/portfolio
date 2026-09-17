@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { profile, heroStats } from "@/lib/content";
 import { useTailor } from "./TailorContext";
-import { ShaderField } from "./ShaderField";
 
 export function Hero() {
   const { result } = useTailor();
@@ -11,57 +9,46 @@ export function Hero() {
 
   return (
     <>
-      <header className="hero" id="top">
-        <ShaderField />
-        <div className="hero-content">
-        <span className="eyebrow accent reveal">Forward Deployed Engineer · AI Systems &amp; Solutions</span>
-        <h1 className="display h1 reveal">
-          I build production systems people <span className="accent-word">trust</span>.
-        </h1>
-        <p className="lede hero-lede reveal">{tagline}</p>
-        <div className="hero-cta reveal">
-          <a href="#projects" className="btn btn-primary">View work</a>
-          <a href="#contact" className="btn btn-ghost">Get in touch</a>
+      <header className="hero cine" id="top">
+        <div className="cine-bg">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/hero-cine.jpg" alt="" aria-hidden="true" />
         </div>
-
-        <div className="hero-panel">
-          <div className="portrait reveal">
-            <Image src="/photo.jpg" alt={profile.name} width={560} height={700} priority sizes="(max-width: 940px) 100vw, 500px" />
-            <div className="ptag">
-              <div className="n">{profile.name}</div>
-              <div className="r">{profile.discipline}</div>
-            </div>
+        <div className="cine-overlay" />
+        <div className="cine-grain" />
+        <div className="cine-content">
+          <span className="cine-eyebrow reveal">Forward Deployed Engineer · 2022 → Now</span>
+          <h1 className="cine-title reveal">
+            From the frontend to the <em>frontier of AI</em>.
+          </h1>
+          <p className="cine-sub reveal">
+            I started writing frontends, grew into full-stack, went deep on business analytics —
+            and now I engineer production AI systems. This is the path.
+          </p>
+          <div className="cine-cue reveal">
+            <span className="rule" />
+            Scroll the story
           </div>
-
-          <div className="nowcard reveal">
-            <div className="nc-head">
-              <span className="eyebrow">Profile</span>
-              <span className="nc-dot" title="Open to new roles" />
-            </div>
-            <dl>
-              <div className="nc-row"><dt>Role</dt><dd>{profile.discipline}</dd></div>
-              <div className="nc-row"><dt>Exp</dt><dd>{profile.experience}</dd></div>
-              <div className="nc-row"><dt>Focus</dt><dd><span className="soft">{profile.focusShort}</span></dd></div>
-              <div className="nc-row"><dt>Current</dt><dd>{profile.company}</dd></div>
-              <div className="nc-row"><dt>Base</dt><dd>{profile.location}</dd></div>
-              <div className="nc-row"><dt>Status</dt><dd>{profile.status}</dd></div>
-            </dl>
-          </div>
-        </div>
         </div>
       </header>
 
-      <section className="stat-band">
-        <div className="stat-grid reveal-c">
-          {heroStats.map((s) => (
-            <div className="stat" key={s.label}>
-              <div className="n">
-                <span className="counter" data-target={s.value}>0</span>
-                {s.suffix && <span className="suf">{s.suffix}</span>}
+      <section className="stat-band" id="intro">
+        <div className="intro-grid">
+          <div className="reveal">
+            <span className="eyebrow accent">In brief</span>
+            <p className="intro-lede">{tagline}</p>
+          </div>
+          <div className="stat-grid reveal-c">
+            {heroStats.map((s) => (
+              <div className="stat" key={s.label}>
+                <div className="n">
+                  <span className="counter" data-target={s.value}>0</span>
+                  {s.suffix && <span className="suf">{s.suffix}</span>}
+                </div>
+                <div className="l">{s.label}</div>
               </div>
-              <div className="l">{s.label}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </>
