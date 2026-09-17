@@ -75,10 +75,10 @@ body::before {
 
 .shell { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
 
-/* reveal — hidden only when JS is ready */
-.js-ready .reveal, .js-ready .reveal-c { opacity: 0; }
-.js-ready .reveal { transform: translateY(24px); }
-.js-ready .reveal-c > * { opacity: 0; transform: translateY(20px); }
+/* Reveal targets are visible by default. The motion layer (anime.js) hides them
+   via inline styles only while it is actively running, with a fail-safe that
+   restores visibility — so content can never be permanently hidden. */
+.reveal, .reveal-c { will-change: opacity, transform; }
 
 /* ============================================================
    NAV
@@ -148,6 +148,18 @@ body::before {
 .stat .n { font-size: clamp(40px, 5vw, 62px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .stat .n .suf { color: var(--color-accent); }
 .stat .l { font-size: 13.5px; color: var(--color-muted); margin-top: 12px; }
+
+/* ============================================================
+   KINETIC MARQUEE — editorial capability strip
+   ============================================================ */
+.marquee { overflow: hidden; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); background: var(--color-surface-2); padding: 22px 0; position: relative; z-index: 2; }
+.marquee-track { display: flex; align-items: center; width: max-content; white-space: nowrap; animation: mq 46s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.mq-item { font-family: var(--font-sans); font-weight: 600; font-size: clamp(26px, 4vw, 52px); letter-spacing: -0.03em; color: var(--color-ink); padding: 0 30px; }
+.mq-item.serif { font-family: var(--font-serif); font-style: italic; font-weight: 500; color: var(--color-accent); }
+.mq-sep { color: var(--color-accent); font-size: clamp(14px, 1.6vw, 20px); opacity: 0.8; }
+@keyframes mq { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; white-space: normal; } }
 
 /* ============================================================
    SECTIONS
