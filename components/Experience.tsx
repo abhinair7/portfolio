@@ -41,7 +41,7 @@ export function Experience() {
                   <div className="tl-logo">
                     <Image src={entry.logo} alt={entry.company} width={30} height={30} />
                   </div>
-                  <div>
+                  <div className="tl-idwrap">
                     <div className="tl-role">{entry.role}</div>
                     <div className="tl-company">{entry.company} · {entry.type}</div>
                   </div>

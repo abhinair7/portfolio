@@ -388,9 +388,14 @@ body::before {
   .intro-grid { grid-template-columns: 1fr; gap: 36px; }
   .cine-content { padding-bottom: 56px; }
   .skill-grid, .proj-grid, .edu-grid { grid-template-columns: 1fr; }
-  .tl-head { grid-template-columns: 44px 1fr auto; }
-  .tl-date { grid-column: 2; }
-  .tl-body-inner { padding-left: 8px; }
+  .tl-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; padding: 22px 4px; }
+  .tl-logo { order: 1; width: 44px; height: 44px; }
+  .tl-idwrap { order: 2; flex: 1; min-width: 0; }
+  .tl-toggle { order: 3; }
+  .tl-date { order: 4; flex-basis: 100%; }
+  .tl-date .loc { display: inline; margin-top: 0; margin-left: 10px; }
+  .tl-role { font-size: 17px; }
+  .tl-body-inner { padding-left: 4px; }
   .contact-in { grid-template-columns: 1fr; gap: 36px; }
 }
 @media (max-width: 640px) {
