@@ -19,10 +19,10 @@ export function Experience() {
     <section className="section tinted" id="experience">
       <div className="section-in">
         <div className="section-head reveal">
-          <span className="eyebrow accent">Experience — in detail</span>
+          <span className="eyebrow accent">Experience</span>
           <h2 className="display h2">The <em>record</em></h2>
           <p className="sub">
-            The same journey, as a hiring manager reads it — roles, dates, and what shipped. Select a role to expand the detail.
+            Roles, dates, and what shipped — select any to expand the detail.
           </p>
         </div>
 
