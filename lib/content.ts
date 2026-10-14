@@ -30,7 +30,7 @@ export const heroStats = [
 export const marquee = [
   "Python", "Large Language Models", "Microsoft SQL Server", "Data Engineering",
   "RAG", "ETL", "AI Agents", "Model Context Protocol", "FastAPI", "pandas",
-  "Ollama", "Parquet", "Prompt Engineering", "Forecasting", "Power BI",
+  "Ollama", "Claude", "Agentic AI", "Parquet", "Prompt Design", "Forecasting", "Power BI",
   "T-SQL", "pytest", "MRP",
 ] as const;
 
@@ -100,7 +100,7 @@ export const skills: Skill[] = [
     code: "01",
     title: "AI & LLM Systems",
     description:
-      "On-premise LLMs (Ollama, quantized 14B), RAG pipelines, Model Context Protocol, AI agents, prompt engineering, deterministic evidence chains over model guesswork, Claude & OpenAI APIs.",
+      "On-premise LLMs (Ollama, quantized 14B), RAG pipelines, Model Context Protocol, agentic assistants on Claude with MCP tool calling, an LLM-narrates-never-calculates guardrail, prompt design, deterministic evidence chains over model guesswork, Claude & OpenAI APIs.",
   },
   {
     code: "02",
@@ -146,12 +146,14 @@ export const experience: ExperienceEntry[] = [
     location: "Boston, MA",
     type: "Full-time",
     bullets: [
-      "Designed and deployed a 16-stage Python MRP and inventory planning engine processing 4M+ ERP transaction records and 15 years of demand history across ~5,600 SKUs, replacing a legacy Visual Basic process.",
-      "Identified and corrected 9 systemic defects in the legacy planning logic, cutting unnecessary planned purchase commitment by double digits while raising measured service level.",
-      "Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) that answers purchasing questions from a deterministic evidence chain with no data leaving the network — latency cut from 243s to 30–150ms.",
+      "Designed and deployed a 16-stage Python MRP and inventory planning engine processing 4M+ ERP transaction records and 15 years of demand history across ~5,600 SKUs, replacing a legacy Visual Basic process. Unnecessary planned purchase commitment fell by double digits while measured service level rose.",
+      "Built an agentic planning assistant on Claude with MCP tool calling over the live ERP: a deterministic pipeline where the LLM narrates and never calculates, so every figure traces to ERP output and none is invented. Now in validation with three planners ahead of IT security review.",
+      "Diagnosed 13 execution defects and 7 methodology gaps in the legacy planning logic and quantified the master-data debt behind them (about 60% of open purchase orders past due, 61% of plan items with no reorder point). The evidence won directors' backing for the modernization roadmap and secured ERP source access, a test instance and read-only SQL.",
+      "Audited all nine endpoints of the ERP's MCP connector, ranked the gaps, fixed an undocumented ~96-row response cutoff with cursor pagination, and turned an unwired call-log endpoint into a spares-demand signal.",
+      "Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) that answers purchasing questions from a deterministic evidence chain with no data leaving the network. Latency fell from 243s to 30–150ms (over 1,600x faster) with zero per-query API cost.",
       "Built an evidence-based price calibration engine on a reconstructed 16-year pricing history, and a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server.",
     ],
-    impacts: ["4M+ ERP Records", "~5,600 SKUs", "Double-Digit % Commitment Cut", "243s → 30ms", "1,777 Tests"],
+    impacts: ["4M+ ERP Records", "~5,600 SKUs", "Double-Digit % Commitment Cut", "243s → 30–150ms", "1,777 Tests", "13 Defects + 7 Gaps Found"],
   },
   {
     id: "umass",
@@ -250,7 +252,7 @@ export const projects: Project[] = [
       "Chose a fully traced 16-stage pipeline over a black-box rewrite so every buy is defensible — at the cost of more engineering up front.",
     summary:
       "A 16-stage pipeline reads 4M+ ERP transactions and 15 years of demand history, runs multi-level BOM explosion and statistical safety stock, and attaches a 6-step math trace to every recommendation so a buyer can defend the number.",
-    metrics: ["9 Defects Fixed", "Double-Digit % Cut", "BOM 30min → 14s"],
+    metrics: ["13 Defects + 7 Gaps Found", "Double-Digit % Cut", "BOM 30min → 14s"],
     proprietary: true,
   },
   {
@@ -264,8 +266,8 @@ export const projects: Project[] = [
     tradeoff:
       "Grounded every answer in a deterministic evidence chain rather than free generation — trading fluency for traceability and zero data egress.",
     summary:
-      "Answers 'why is this part being bought?' from a deterministic evidence chain rather than model guesswork, so every answer traces back to the pipeline that produced it. Runs fully on-network. Circuit breakers and per-intent deadlines took it from unusable to instant.",
-    metrics: ["243s → 30–150ms", "Quantized 14B", "Zero Data Egress"],
+      "Answers 'why is this part being bought?' from a deterministic evidence chain rather than model guesswork, so every answer traces back to the pipeline that produced it. Runs fully on-network. Circuit breakers and per-intent deadlines took it from unusable to instant. A Claude agent with MCP tool calling sits on top: the LLM narrates and never calculates, so no figure is invented.",
+    metrics: ["243s → 30–150ms", "Over 1,600x Faster", "Quantized 14B", "Zero Data Egress"],
     proprietary: true,
   },
   {
