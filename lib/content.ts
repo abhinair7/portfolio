@@ -12,7 +12,7 @@ export const profile = {
   experience: "4+ years",
   focusShort: "AI Systems · Data Eng · Supply Chain",
   tagline:
-    "Forward deployed engineer and AI systems builder with 4+ years shipping production software — data engineering, applied AI, and analytics that turn operational complexity into decisions teams trust.",
+    "AI systems engineer with 4+ years shipping production software. At Iwaki America: a 16-stage planning engine over 4M+ ERP records, a Claude agent that narrates but never calculates, and on-premise LLMs where no data leaves the network.",
   focus: ["AI Systems", "Data Engineering", "Supply Chain"],
   status: "Open to new roles",
   email: "a.nair002@umb.edu",
@@ -23,14 +23,14 @@ export const profile = {
 
 export const heroStats = [
   { value: 4, suffix: "+ yrs", label: "Shipping Production Systems" },
-  { value: 6, suffix: "", label: "Systems Built End-to-End" },
+  { value: 4, suffix: "M+", label: "ERP Transactions Planned" },
   { value: 1777, suffix: "", label: "Automated Tests Written" },
 ] as const;
 
 export const marquee = [
-  "Python", "Large Language Models", "Microsoft SQL Server", "Data Engineering",
-  "RAG", "ETL", "AI Agents", "Model Context Protocol", "FastAPI", "pandas",
-  "Ollama", "Claude", "Agentic AI", "Parquet", "Prompt Design", "Forecasting", "Power BI",
+  "Python", "Agentic AI", "Claude", "Model Context Protocol", "Large Language Models",
+  "RAG", "AI Agents", "Ollama", "Microsoft SQL Server", "Data Engineering", "ETL", "FastAPI", "pandas",
+  "Parquet", "Prompt Design", "Forecasting", "Power BI",
   "T-SQL", "pytest", "MRP",
 ] as const;
 
@@ -82,8 +82,8 @@ export const journey: JourneyAct[] = [
     chapter: "Chapter IV",
     years: "2026 — Now",
     title: "AI Engineering",
-    role: "Forward Deployed Engineer · Iwaki America",
-    line: "Now I bring AI to that question — production MRP, pricing, and on-premise LLM systems that turn operational data into decisions teams trust.",
+    role: "Digital Transformation Specialist · Iwaki America",
+    line: "Now I bring AI to that question — a 16-stage planning engine, a Claude agent that narrates but never calculates, and on-premise LLMs that turn ERP data into decisions teams trust.",
     icons: ["siPython", "siPytorch", "siOpenai", "siFastapi", "siOllama"],
     media: { type: "image", src: "/photo.jpg" },
   },
@@ -106,7 +106,7 @@ export const skills: Skill[] = [
     code: "02",
     title: "Data & ETL Engineering",
     description:
-      "Python, pandas, NumPy, Microsoft SQL Server, T-SQL, Parquet/PyArrow, 16-endpoint ERP integration, parallelized bulk extraction, windowed cursors, durable systems of record.",
+      "Python, pandas, NumPy, Microsoft SQL Server, T-SQL, Parquet/PyArrow, 16-endpoint ERP integration, MCP connector auditing, cursor pagination, parallelized bulk extraction, durable systems of record.",
   },
   {
     code: "03",
@@ -151,7 +151,8 @@ export const experience: ExperienceEntry[] = [
       "Diagnosed 13 execution defects and 7 methodology gaps in the legacy planning logic and quantified the master-data debt behind them (about 60% of open purchase orders past due, 61% of plan items with no reorder point). The evidence won directors' backing for the modernization roadmap and secured ERP source access, a test instance and read-only SQL.",
       "Audited all nine endpoints of the ERP's MCP connector, ranked the gaps, fixed an undocumented ~96-row response cutoff with cursor pagination, and turned an unwired call-log endpoint into a spares-demand signal.",
       "Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) that answers purchasing questions from a deterministic evidence chain with no data leaving the network. Latency fell from 243s to 30–150ms (over 1,600x faster) with zero per-query API cost.",
-      "Built an evidence-based price calibration engine on a reconstructed 16-year pricing history, and a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server.",
+      "Built the evidence-based price calibration engine behind the 2026 price-increase cycle on a reconstructed 16-year pricing history; two product managers validated the output. Also built a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server.",
+      "Built an MCP data layer over the company's self-hosted Trac ticket system, with inference kept strictly on-premise (Phase 1 shipped), plus a self-hosted web portal.",
     ],
     impacts: ["4M+ ERP Records", "~5,600 SKUs", "Double-Digit % Commitment Cut", "243s → 30–150ms", "1,777 Tests", "13 Defects + 7 Gaps Found"],
   },
@@ -240,6 +241,36 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: "agent",
+    slug: "agentic-planning-assistant",
+    name: "Agentic Planning Assistant",
+    glyph: "AGT",
+    tags: ["Claude", "MCP", "Python", "ERP"],
+    problem: "Planners could not interrogate the plan in plain English without risking an LLM inventing numbers.",
+    audience: "Purchasing planners at an industrial pump manufacturer.",
+    tradeoff:
+      "Kept the model out of the math entirely: a 16-node deterministic pipeline computes, the LLM only narrates. Less free-form than a chatbot, but every figure traces to ERP output.",
+    summary:
+      "A Claude agent with MCP tool calling over the live ERP. The deterministic pipeline does every calculation and the LLM narrates the result, so no figure is invented. In validation with three planners ahead of IT security review.",
+    metrics: ["16-Node Pipeline", "LLM Narrates, Never Calculates", "3-Planner Validation"],
+    proprietary: true,
+  },
+  {
+    id: "tickets",
+    slug: "ticket-mcp-layer",
+    name: "Ticketing MCP Data Layer",
+    glyph: "MCP",
+    tags: ["MCP", "Python", "Trac", "On-Prem"],
+    problem: "Support history sat in a self-hosted ticket system nobody could query in plain language.",
+    audience: "Internal software and support teams.",
+    tradeoff:
+      "Kept inference strictly on-premise instead of calling a hosted model, trading some model capability for zero data leaving the network.",
+    summary:
+      "An MCP data layer over the company's self-hosted Trac ticket system, with all inference on-premise. Phase 1 shipped, alongside a self-hosted web portal.",
+    metrics: ["Phase 1 Shipped", "On-Prem Only"],
+    proprietary: true,
+  },
   {
     id: "mrp",
     slug: "mrp-engine",
