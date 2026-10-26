@@ -152,7 +152,7 @@ export const experience: ExperienceEntry[] = [
       "Audited all nine endpoints of the ERP's MCP connector, ranked the gaps, fixed an undocumented ~96-row response cutoff with cursor pagination, and turned an unwired call-log endpoint into a spares-demand signal.",
       "Deployed a fully on-premise LLM assistant (Ollama, quantized 14B) that answers purchasing questions from a deterministic evidence chain with no data leaving the network. Latency fell from 243s to 30–150ms (over 1,600x faster) with zero per-query API cost.",
       "Built the evidence-based price calibration engine behind the 2026 price-increase cycle on a reconstructed 16-year pricing history; two product managers validated the output. Also built a 16-endpoint ERP integration layer compressing the primary feed ~15x into Parquet + SQL Server.",
-      "Built an MCP data layer over the company's self-hosted Trac ticket system, with inference kept strictly on-premise (Phase 1 shipped), plus a self-hosted web portal.",
+      "Built and shipped an MCP data layer over the company's self-hosted Trac ticket system, with inference kept strictly on-premise, plus a self-hosted web portal; the team received it well.",
     ],
     impacts: ["4M+ ERP Records", "~5,600 SKUs", "Double-Digit % Commitment Cut", "243s → 30–150ms", "1,777 Tests", "13 Defects + 7 Gaps Found"],
   },
@@ -177,8 +177,8 @@ export const experience: ExperienceEntry[] = [
     role: "Business Analyst Intern",
     company: "Cypress Atlantic",
     logo: "/logo-cypress.png",
-    start: "Jun 2024",
-    end: "Aug 2024",
+    start: "Jun 2025",
+    end: "Aug 2025",
     location: "Boston, MA",
     type: "Internship",
     bullets: [
@@ -267,8 +267,8 @@ export const projects: Project[] = [
     tradeoff:
       "Kept inference strictly on-premise instead of calling a hosted model, trading some model capability for zero data leaving the network.",
     summary:
-      "An MCP data layer over the company's self-hosted Trac ticket system, with all inference on-premise. Phase 1 shipped, alongside a self-hosted web portal.",
-    metrics: ["Phase 1 Shipped", "On-Prem Only"],
+      "An MCP data layer over the company's self-hosted Trac ticket system, with all inference on-premise, shipped to the team alongside a self-hosted web portal and well received.",
+    metrics: ["Shipped", "Well Received", "On-Prem Only"],
     proprietary: true,
   },
   {
